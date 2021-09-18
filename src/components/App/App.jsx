@@ -34,13 +34,14 @@ function App() {
         </header>
         <p>Gallery goes here</p>
         {galleryList.map (picture => (
-          (<div key={picture.id}>
-          <img src={picture.path}/>
+          (<div className = "picture-box" key={picture.id}>
+          <img src={picture.path}/><br />
+          <button>Love it!</button>
           </div>)
 
 
         ))}
-        <img src="images/goat_small.jpg"/>
+        
       </div>
     );
 }
