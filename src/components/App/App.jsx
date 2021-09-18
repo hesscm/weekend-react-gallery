@@ -2,6 +2,8 @@ import Axios from 'axios';
 import React from 'react';
 import {useState, useEffect} from 'react';
 import './App.css';
+import '../GalleryList/GalleryList';
+import GalleryList from '../GalleryList/GalleryList';
 
 function App() {
 
@@ -23,25 +25,17 @@ function App() {
       });
   };
 
-
-
-
+  const updateLikeCount = () => {
+    console.log('in updateLikeCount');
+  }
 
     return (
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Gallery of My Life</h1>
         </header>
-        <p>Gallery goes here</p>
-        {galleryList.map (picture => (
-          (<div className = "picture-box" key={picture.id}>
-          <img src={picture.path}/><br />
-          <button>Love it!</button>
-          </div>)
-
-
-        ))}
-        
+      <GalleryList 
+        galleryList = {galleryList}/>
       </div>
     );
 }

@@ -15,5 +15,19 @@
 
 .picture-box {
   float: left;
+  margin: 10px;
+  width: 300px;
+  height: 300px;
+  z-index: -1;
+  border: 3px solid black;
+}
+
+img {
+  width: 150px;
+  height: 150px;
   padding: 10px;
+}
+
+button {
+  padding: 2px;
 }
