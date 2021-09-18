@@ -1,7 +1,26 @@
+import Axios from 'axios';
 import React from 'react';
+import {useState, useEffect} from 'react';
 import './App.css';
 
 function App() {
+
+  useEffect(() => {
+    getGallery();
+  }, []);
+
+  const getGallery = () => {
+    Axios.get('/gallery')
+      .then( (response) => {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+
+
     return (
       <div className="App">
         <header className="App-header">
