@@ -5,19 +5,25 @@ import './App.css';
 
 function App() {
 
+  const [galleryList, setGalleryList] = useState([]);
+
+  //run getGallery() on load
   useEffect(() => {
     getGallery();
   }, []);
 
   const getGallery = () => {
-    Axios.get('/gallery')
-      .then( (response) => {
-        console.log(response);
+    Axios.get('/gallery') //get the gallery route
+      .then( (response) => { //log and set response
+        console.log(response.data);
+        setGalleryList(response.data);
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch(function (error) { //catch an error
+        console.log('Error on GET request.', error);
       });
   };
+
+
 
 
 
@@ -27,6 +33,13 @@ function App() {
           <h1 className="App-title">Gallery of My Life</h1>
         </header>
         <p>Gallery goes here</p>
+        {galleryList.map (picture => (
+          (<div key={picture.id}>
+          <img src={picture.path}/>
+          </div>)
+
+
+        ))}
         <img src="images/goat_small.jpg"/>
       </div>
     );
