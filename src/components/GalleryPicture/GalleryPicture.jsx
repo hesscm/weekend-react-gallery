@@ -16,7 +16,10 @@ function GalleryPicture(props) {
             }
       }
 
-      const addLikeCount = (likeCount) => {
+      const handleLikeButton = (likeID) => {
+          console.log('in addLikeCount', likeID);
+          
+          props.updateLikeCount(likeID);
           
       }
 
@@ -32,7 +35,8 @@ function GalleryPicture(props) {
                 : <><img  src={props.picture.path}/></>} <br />
                 
             {/* click to add to the like count on the DOM*/}
-            <button>Love it!</button><br />
+            <p>Like Count: {props.picture.likes}</p>
+            <button onClick={() => handleLikeButton(props.picture.id)}>Love it!</button><br />
             {/* click to show description or the picture */}
             <button onClick={togglePicture}>Show Description</button>
             <br />

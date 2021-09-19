@@ -9,6 +9,7 @@ function GalleryList(props) {
                 <GalleryPicture 
                     key={picture.id}
                     picture={picture}
+                    updateLikeCount={props.updateLikeCount}
                     />
             ))}
         </>

@@ -25,17 +25,27 @@ function App() {
       });
   };
 
-  const updateLikeCount = () => {
+  const updateLikeCount = (likeID) => {
     console.log('in updateLikeCount');
-  }
+    Axios.put(`/gallery/like/${likeID}`)
+    .then( (response) => { //log and set response
+      console.log(response);
+      getGallery();
+    })
+    .catch(function (error) { //catch an error
+      console.log('Error on PUT request.', error);
+    });
+};
 
     return (
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Gallery of My Life</h1>
         </header>
-      <GalleryList 
-        galleryList = {galleryList}/>
+        <GalleryList 
+          galleryList = {galleryList}
+          updateLikeCount = {updateLikeCount}
+        />
       </div>
     );
 }
