@@ -17,9 +17,12 @@ function GalleryPicture(props) {
       }
 
       const handleLikeButton = (likeID) => {
-          console.log('in addLikeCount', likeID);
-          
+          console.log('in handleLikeButton', likeID);
           props.updateLikeCount(likeID);
+      }
+      const handleDelete = (deleteID) => {
+          console.log('in handleDelete');
+          props.deletePicture(deleteID);
           
       }
 
@@ -37,6 +40,8 @@ function GalleryPicture(props) {
             {/* click to add to the like count on the DOM*/}
             <p>Like Count: {props.picture.likes}</p>
             <button onClick={() => handleLikeButton(props.picture.id)}>Love it!</button><br />
+            {/* click to delete the picture */}
+            <button onClick={() => handleDelete(props.picture.id)}>Delete Picture</button>
             {/* click to show description or the picture */}
             <button onClick={togglePicture}>Show Description</button>
             <br />

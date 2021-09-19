@@ -60,8 +60,22 @@ const addAnImage = (event) => {
   .catch(function (error) {
     console.log(error);
   });
-  
 }
+
+const deletePicture = (deleteID) => {
+  console.log('in deletePicture', deleteID);
+  Axios({
+    method: 'DELETE',
+    url: `/gallery/${deleteID}`
+  })
+  .then( (response) => { //log and set response
+    console.log(response);
+    getGallery();
+  })
+  .catch(function (error) { //catch an error
+    console.log('Error on DELETE request.', error);
+  });
+};
 
     return (
       <div className="App">
@@ -72,11 +86,14 @@ const addAnImage = (event) => {
         <GalleryForm 
           addAnImage = {addAnImage}
           setNewPicturePath = {setNewPicturePath}
-          setNewPictureDescription = {setNewPictureDescription}  
+          setNewPictureDescription = {setNewPictureDescription}
+          
+
         />
         <GalleryList 
           galleryList = {galleryList}
           updateLikeCount = {updateLikeCount}
+          deletePicture = {deletePicture}
         />
       </div>
     );

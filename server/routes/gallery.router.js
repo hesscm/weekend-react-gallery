@@ -7,11 +7,11 @@ const pool = require('../modules/pool.js');
 
 // PUT Route
 router.put('/like/:id', (req, res) => {
-    const itemId = req.params.id;
+    const pictureId = req.params.id;
     const sqlText = `UPDATE gallery 
                      SET likes = (likes + 1) 
                      WHERE "id" = $1;`;
-    pool.query(sqlText, [itemId])
+    pool.query(sqlText, [pictureId])
     .then((result) => {
         console.log('Successfully updated like count!')
         res.sendStatus(200);
@@ -51,9 +51,23 @@ router.post('/', (req, res) => {
             console.log(`Error making database query ${sqlText}`, error);
             res.sendStatus(500); // Good server always responds
         })
+    });
+
+// DELETE Route
+router.delete('/:id', (req, res) => {
+    const pictureID = req.params.id;
+    console.log('in delete route', pictureID);
+    const sqlText = `DELETE FROM gallery WHERE "id" = $1;`;
+    pool.query(sqlText, [pictureID])
+    .then((result) => {
+        console.log('Successfully deleted an item!')
+        res.sendStatus(200);
+    }).catch((error) => {
+        console.log('Error in DELETE route.', error);
+        res.sendStatus(500);
+    })
+}); // END PUT Route
 
 
-
-});
 
 module.exports = router;
