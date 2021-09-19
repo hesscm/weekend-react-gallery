@@ -17,7 +17,7 @@ function App() {
   const getGallery = () => {
     Axios.get('/gallery') //get the gallery route
       .then( (response) => { //log and set response
-        console.log(response.data);
+        console.table(response.data);
         setGalleryList(response.data);
       })
       .catch(function (error) { //catch an error

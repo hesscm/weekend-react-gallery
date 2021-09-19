@@ -1,26 +1,38 @@
 const express = require('express');
 const router = express.Router();
-const galleryItems = require('../modules/gallery.data');
+// const galleryItems = require('../modules/gallery.data');
+const pool = require('../modules/pool.js');
 
 // DO NOT MODIFY THIS FILE FOR BASE MODE
 
 // PUT Route
 router.put('/like/:id', (req, res) => {
-    console.log(req.params);
-    const galleryId = req.params.id;
-    console.log(galleryId);
-    
-    for(const galleryItem of galleryItems) {
-        if(galleryItem.id == parseInt(galleryId)) {
-            galleryItem.likes += 1;
-        }
-    }
-    res.sendStatus(200);
+    const itemId = req.params.id;
+    const sqlText = `UPDATE gallery 
+                     SET likes = (likes + 1) 
+                     WHERE "id" = $1;`;
+    pool.query(sqlText, [itemId])
+    .then((result) => {
+        console.log('Successfully updated like count!')
+        res.sendStatus(200);
+    }).catch((error) => {
+        console.log('Error in PUT updating like count.', error);
+        res.sendStatus(500);
+    })
 }); // END PUT Route
 
 // GET Route
 router.get('/', (req, res) => {
-    res.send(galleryItems);
+    const sqlText = `SELECT * FROM gallery ORDER BY id DESC LIMIT 30;`;
+    pool.query(sqlText)
+        .then((result) => {
+            console.log(`Got stuff back from the database`, result.rows);
+            res.send(result.rows);
+        })
+        .catch((error) => {
+            console.log(`Error making database query ${sqlText}`, error);
+            res.sendStatus(500); // Good server always responds
+        })
 }); // END GET Route
 
 module.exports = router;
