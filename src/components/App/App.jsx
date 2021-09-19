@@ -63,19 +63,19 @@ const addAnImage = (event) => {
 }
 
 const deletePicture = (deleteID) => {
-    console.log('in deletePicture ', deleteID);
-    // Axios request here...
-    Axios({
-      method: 'DELETE',
-      url: `/gallery/${deleteID}`, // :id
-    }).then((response) => {
-      getGallery();
-    }).catch((error) => {
-      alert('Error in deletePicture');
-      console.log(error);
-    });
-  }
-}
+  console.log('in deletePicture', deleteID);
+  Axios({
+    method: 'DELETE',
+    url: `/gallery/${deleteID}`
+  })
+  .then( (response) => { //log and set response
+    console.log(response);
+    getGallery();
+  })
+  .catch(function (error) { //catch an error
+    console.log('Error on DELETE request.', error);
+  });
+};
 
     return (
       <div className="App">
@@ -86,12 +86,14 @@ const deletePicture = (deleteID) => {
         <GalleryForm 
           addAnImage = {addAnImage}
           setNewPicturePath = {setNewPicturePath}
-          setNewPictureDescription = {setNewPictureDescription}  
+          setNewPictureDescription = {setNewPictureDescription}
+          
 
         />
         <GalleryList 
           galleryList = {galleryList}
           updateLikeCount = {updateLikeCount}
+          deletePicture = {deletePicture}
         />
       </div>
     );

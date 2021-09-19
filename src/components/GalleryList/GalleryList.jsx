@@ -10,6 +10,7 @@ function GalleryList(props) {
                     key={picture.id}
                     picture={picture}
                     updateLikeCount={props.updateLikeCount}
+                    deletePicture = {props.deletePicture}
                     />
             ))}
         </>
