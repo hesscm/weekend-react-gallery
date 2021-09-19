@@ -60,7 +60,21 @@ const addAnImage = (event) => {
   .catch(function (error) {
     console.log(error);
   });
-  
+}
+
+const deletePicture = (deleteID) => {
+    console.log('in deletePicture ', deleteID);
+    // Axios request here...
+    Axios({
+      method: 'DELETE',
+      url: `/gallery/${deleteID}`, // :id
+    }).then((response) => {
+      getGallery();
+    }).catch((error) => {
+      alert('Error in deletePicture');
+      console.log(error);
+    });
+  }
 }
 
     return (
@@ -73,6 +87,7 @@ const addAnImage = (event) => {
           addAnImage = {addAnImage}
           setNewPicturePath = {setNewPicturePath}
           setNewPictureDescription = {setNewPictureDescription}  
+
         />
         <GalleryList 
           galleryList = {galleryList}
