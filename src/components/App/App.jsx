@@ -4,6 +4,7 @@ import {useState, useEffect} from 'react';
 import './App.css';
 import '../GalleryList/GalleryList';
 import GalleryList from '../GalleryList/GalleryList';
+import GalleryForm from '../GalleryForm/GalleryForm';
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
     getGallery();
   }, []);
 
+  //axios GET function
   const getGallery = () => {
     Axios.get('/gallery') //get the gallery route
       .then( (response) => { //log and set response
@@ -25,6 +27,7 @@ function App() {
       });
   };
 
+  //axios PUT function to update like count
   const updateLikeCount = (likeID) => {
     console.log('in updateLikeCount');
     Axios.put(`/gallery/like/${likeID}`)
@@ -37,11 +40,18 @@ function App() {
     });
 };
 
+//axios POST function to add a new image
+const addAnImage = (input) => {
+  console.log('in addAnImage', input);
+  
+}
+
     return (
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Gallery of My Life</h1>
         </header>
+        <GalleryForm />
         <GalleryList 
           galleryList = {galleryList}
           updateLikeCount = {updateLikeCount}

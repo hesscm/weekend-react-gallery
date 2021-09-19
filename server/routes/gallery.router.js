@@ -35,4 +35,23 @@ router.get('/', (req, res) => {
         })
 }); // END GET Route
 
+// POST Route
+router.post('/', (req, res) => {
+    const image = req.body; //object
+    const sqlText = `INSERT INTO gallery (path, description)
+                     VALUES ($1, $2);`; //send 
+    pool.query(sqlText, [image.path, image.description])
+        .then((result) => {
+            console.log(`Added image to the database`, creature);
+            res.sendStatus(201); //respond with 'Created'
+        })
+        .catch((error) => {
+            console.log(`Error making database query ${sqlText}`, error);
+            res.sendStatus(500); // Good server always responds
+        })
+
+
+
+});
+
 module.exports = router;
