@@ -8,6 +8,8 @@ import GalleryForm from '../GalleryForm/GalleryForm';
 
 function App() {
 
+  const [newPicturePath, setNewPicturePath] = useState('');
+  const [newPictureDecription, setNewPictureDescription] = useState('');
   const [galleryList, setGalleryList] = useState([]);
 
   //run getGallery() on load
@@ -41,8 +43,23 @@ function App() {
 };
 
 //axios POST function to add a new image
-const addAnImage = (input) => {
-  console.log('in addAnImage', input);
+const addAnImage = (event) => {
+  event.preventDefault();
+  console.log('in addAnImage');
+  Axios({
+    method: 'POST',
+    url: '/gallery', 
+    data: {
+      path: newPicturePath,
+      description: newPictureDecription
+    }
+  })
+  .then( (response) => {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
   
 }
 
@@ -51,7 +68,12 @@ const addAnImage = (input) => {
         <header className="App-header">
           <h1 className="App-title">Gallery of My Life</h1>
         </header>
-        <GalleryForm />
+        <p>{newPicturePath}</p>
+        <GalleryForm 
+          addAnImage = {addAnImage}
+          setNewPicturePath = {setNewPicturePath}
+          setNewPictureDescription = {setNewPictureDescription}  
+        />
         <GalleryList 
           galleryList = {galleryList}
           updateLikeCount = {updateLikeCount}

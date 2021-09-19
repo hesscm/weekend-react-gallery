@@ -38,11 +38,13 @@ router.get('/', (req, res) => {
 // POST Route
 router.post('/', (req, res) => {
     const image = req.body; //object
+    console.log(image);
+    
     const sqlText = `INSERT INTO gallery (path, description)
                      VALUES ($1, $2);`; //send 
     pool.query(sqlText, [image.path, image.description])
         .then((result) => {
-            console.log(`Added image to the database`, creature);
+            console.log(`Added image to the database`, image);
             res.sendStatus(201); //respond with 'Created'
         })
         .catch((error) => {
