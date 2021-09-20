@@ -1,6 +1,10 @@
 .App {
   text-align: center;
 }
+body {
+  background-color: antiquewhite;
+  background-image: url("https://www.transparenttextures.com/patterns/fabric-1-dark.png");
+}
 
 .App-header {
   background-color: #222;
@@ -17,15 +21,20 @@
   float: left;
   margin: 10px;
   width: 300px;
-  height: 300px;
+  height: 350px;
   z-index: -1;
   border: 3px solid black;
 }
 
+/* .submit-form {
+
+} */
+
 img {
   width: 150px;
-  height: 150px;
-  padding: 10px;
+  height: 200px;
+  margin: 10px;
+  border: 3px solid black;
 }
 
 button {

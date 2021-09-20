@@ -3,7 +3,7 @@ import GalleryPicture from '../GalleryPicture/GalleryPicture'
 function GalleryList(props) {
     return(
         <>
-            <h2>My Images</h2>
+            <h2>Highlights From 2018-2021</h2>
             {/* for loop to display each picture */}
             {props.galleryList.map (picture => (
                 // specify what happens to each div in a separate component

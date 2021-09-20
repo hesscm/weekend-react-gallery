@@ -2,9 +2,10 @@
 function GalleryForm (props) {
     return (
         <>
-        <h3>Add an image: </h3>
+       
         {/* when completed, click the button and run addAnImage() in App.jsx */}
-        <form onSubmit={props.addAnImage}> 
+        <form className = "submit-form" onSubmit={props.addAnImage}> 
+            <h3>Add an image</h3>
             {/* when fields are changed, update the newPicture variables with those fields */}
             <input placeholder="ex: images/name.jpg "type="text" id="path-input" onChange={
                 (event) => props.setNewPicturePath(event.target.value)

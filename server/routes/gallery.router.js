@@ -23,7 +23,7 @@ router.put('/like/:id', (req, res) => {
 
 // GET Route
 router.get('/', (req, res) => {
-    const sqlText = `SELECT * FROM gallery ORDER BY id DESC LIMIT 30;`;
+    const sqlText = `SELECT * FROM gallery ORDER BY id ASC LIMIT 30;`;
     pool.query(sqlText) //send sql command
         .then((result) => {
             console.log(`Got stuff back from the database`, result.rows);

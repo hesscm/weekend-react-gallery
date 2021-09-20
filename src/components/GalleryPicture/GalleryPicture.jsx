@@ -36,7 +36,7 @@ function GalleryPicture(props) {
                     <>
                         <p>{props.picture.description}</p>
                         {/*a way to temporariliy keep buttons in the same spot until I learn how to use CSS*/}
-                        <br /><br /><br /><br /><br />
+                        <br /><br /><br /><br /><br /><br /><br />
                     </> 
                     //else, show the picture
                 :   <img  src={props.picture.path}/>
