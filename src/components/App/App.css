@@ -22,7 +22,6 @@ body {
   margin: 10px;
   width: 300px;
   height: 350px;
-  z-index: -1;
   border: 3px solid black;
 }
 
