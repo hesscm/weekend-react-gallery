@@ -8,11 +8,13 @@ import GalleryForm from '../GalleryForm/GalleryForm';
 
 function App() {
 
+  //variables to set db properties
   const [newPicturePath, setNewPicturePath] = useState('');
   const [newPictureDecription, setNewPictureDescription] = useState('');
+  //list retrieved from db
   const [galleryList, setGalleryList] = useState([]);
 
-  //run getGallery() on load
+  //run getGallery() on load one time
   useEffect(() => {
     getGallery();
   }, []);
@@ -22,7 +24,7 @@ function App() {
     Axios.get('/gallery') //get the gallery route
       .then( (response) => { //log and set response
         console.table(response.data);
-        setGalleryList(response.data);
+        setGalleryList(response.data); //set the list to current db table
       })
       .catch(function (error) { //catch an error
         console.log('Error on GET request.', error);
@@ -43,34 +45,36 @@ function App() {
 };
 
 //axios POST function to add a new image
-const addAnImage = (event) => {
-  event.preventDefault();
+const addAnImage = (event) => { 
+  event.preventDefault(); //stop page refresh
   console.log('in addAnImage');
   Axios({
     method: 'POST',
     url: '/gallery', 
-    data: {
+    data: { //send added properties
       path: newPicturePath,
       description: newPictureDecription
     }
   })
-  .then( (response) => {
+  .then( (response) => { //then log response
     console.log(response);
+    getGallery();
   })
-  .catch(function (error) {
+  .catch(function (error) { //catch error
     console.log(error);
   });
 }
 
+//axios DELETE function to delete a single image
 const deletePicture = (deleteID) => {
   console.log('in deletePicture', deleteID);
   Axios({
     method: 'DELETE',
     url: `/gallery/${deleteID}`
   })
-  .then( (response) => { //log and set response
+  .then( (response) => { //log response
     console.log(response);
-    getGallery();
+    getGallery(); //refresh DOM
   })
   .catch(function (error) { //catch an error
     console.log('Error on DELETE request.', error);
@@ -80,20 +84,19 @@ const deletePicture = (deleteID) => {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Gallery of My Life</h1>
+          <h1 className="App-title">My Gallery</h1>
         </header>
-        <p>{newPicturePath}</p>
+        {/* add input form */}
         <GalleryForm 
           addAnImage = {addAnImage}
           setNewPicturePath = {setNewPicturePath}
           setNewPictureDescription = {setNewPictureDescription}
-          
-
         />
+        {/* display images */}
         <GalleryList 
-          galleryList = {galleryList}
-          updateLikeCount = {updateLikeCount}
-          deletePicture = {deletePicture}
+          galleryList = {galleryList} //list variable
+          updateLikeCount = {updateLikeCount} //put function
+          deletePicture = {deletePicture} //delete function
         />
       </div>
     );

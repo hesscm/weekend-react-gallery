@@ -1,16 +1,17 @@
-
 import GalleryPicture from '../GalleryPicture/GalleryPicture'
 
 function GalleryList(props) {
     return(
         <>
-            <h2>Gallery</h2>
+            <h2>Highlights From 2018-2021</h2>
+            {/* for loop to display each picture */}
             {props.galleryList.map (picture => (
+                // specify what happens to each div in a separate component
                 <GalleryPicture 
-                    key={picture.id}
-                    picture={picture}
-                    updateLikeCount={props.updateLikeCount}
-                    deletePicture = {props.deletePicture}
+                    key={picture.id} //id
+                    picture={picture} //picture object
+                    updateLikeCount={props.updateLikeCount} //put function
+                    deletePicture = {props.deletePicture} //delete function
                     />
             ))}
         </>
